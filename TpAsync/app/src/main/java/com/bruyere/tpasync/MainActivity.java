@@ -20,7 +20,7 @@ public class MainActivity extends AppCompatActivity {
         launchCounter.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                launchWithAsyncTask(counter);
+                launchHttpAsyncTaskWithLib(counter);
             }
         });
     }
@@ -53,5 +53,15 @@ public class MainActivity extends AppCompatActivity {
     private void launchWithAsyncTask(TextView counter) {
         IncrementerAsyncTask incrementerAsyncTask = new IncrementerAsyncTask(this, counter);
         incrementerAsyncTask.execute(100_000_000L);
+    }
+
+    private void launchHttpAsyncTask(TextView result) {
+        HttpAsyncTask httpAsyncTask = new HttpAsyncTask(this, result);
+        httpAsyncTask.execute("https://jsonplaceholder.typicode.com/users");
+    }
+
+    private void launchHttpAsyncTaskWithLib(TextView result) {
+        HttpAsyncTaskWithLib httpAsyncTaskWithLib = new HttpAsyncTaskWithLib(this, result);
+        httpAsyncTaskWithLib.execute("https://jsonplaceholder.typicode.com/users");
     }
 }

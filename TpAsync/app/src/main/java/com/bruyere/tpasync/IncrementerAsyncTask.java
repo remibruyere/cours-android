@@ -24,7 +24,7 @@ public class IncrementerAsyncTask extends AsyncTask<Long, Long, String> {
     protected String doInBackground(Long... longs) {
         long maxVal = longs[0];
         for (long i = 0; i < maxVal; i++) {
-            if (i % 100000 == 0) {
+            if (i % 1000 == 0) {
                 publishProgress(i);
             }
         }
