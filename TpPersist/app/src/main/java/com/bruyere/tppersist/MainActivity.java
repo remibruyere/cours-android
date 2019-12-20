@@ -21,6 +21,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String MY_PREF = "my_pref";
     public static final String MY_DATE_KEY = "my_date_key";
     public static final String MY_CACHE_TXT = "/myCache.txt";
+    public static final String MY_FILE_TXT = "my_file.txt";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     public void writeCache(View view) {
         File cacheDir = getCacheDir();
         try {
-            FileOutputStream fos = new FileOutputStream(cacheDir.getPath()+ MY_CACHE_TXT);
+            FileOutputStream fos = new FileOutputStream(cacheDir.getPath()+ MY_CACHE_TXT, true);
             write(fos, "Cache me if you can !");
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -66,11 +67,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void readFile(View view) {
-
+        try {
+            FileInputStream fileInputStream = openFileInput(MY_FILE_TXT);
+            read(fileInputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     public void writeFile(View view) {
-
+        try {
+            FileOutputStream fileOutputStream = openFileOutput(MY_FILE_TXT, MODE_APPEND);
+            write(fileOutputStream, "Le fichier est vide :D");
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 
     private void read(FileInputStream fis) {
