@@ -3,9 +3,11 @@ package com.bruyere.tproom;
 import android.os.Bundle;
 import android.view.View;
 
+import java.util.List;
 import java.util.Random;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -20,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        StudentAdapter studentAdapter = new StudentAdapter(this);
+        final StudentAdapter studentAdapter = new StudentAdapter(this);
         recyclerView.setAdapter(studentAdapter);
 
         final StudentViewModel studentViewModel = ViewModelProviders.of(this).get(StudentViewModel.class);
@@ -33,6 +35,13 @@ public class MainActivity extends AppCompatActivity {
                 student.setFirstName("Toto_" + i);
                 student.setLastName("TITI_" + i);
                 studentViewModel.insert(student);
+            }
+        });
+
+        studentViewModel.allStudents().observe(this, new Observer<List<Student>>() {
+            @Override
+            public void onChanged(List<Student> students) {
+                studentAdapter.setStudents(students);
             }
         });
     }
