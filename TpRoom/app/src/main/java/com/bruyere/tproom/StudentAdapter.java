@@ -20,6 +20,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
         layoutInflater = LayoutInflater.from(context);
     }
 
+    public void setStudents(List<Student> students) {
+        this.students = students;
+        notifyDataSetChanged();
+    }
+
     @NonNull
     @Override
     public StudentViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
