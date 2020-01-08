@@ -21,11 +21,13 @@ public class MainActivity extends AppCompatActivity implements MyFragment.MyFrag
     @Override
     protected void onResume() {
         super.onResume();
-        FragmentManager fn = getSupportFragmentManager();
-        FragmentTransaction ft = fn.beginTransaction();
-        ft.replace(R.id.fragment_place, new MyFragment());
-        ft.addToBackStack(null);
-        ft.commit();
+        if (findViewById(R.id.fragment_place) != null) {
+            FragmentManager fn = getSupportFragmentManager();
+            FragmentTransaction ft = fn.beginTransaction();
+            ft.replace(R.id.fragment_place, new MyFragment());
+            ft.addToBackStack(null);
+            ft.commit();
+        }
     }
 
     @Override
